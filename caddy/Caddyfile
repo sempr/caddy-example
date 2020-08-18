@@ -7,3 +7,18 @@ g1.me5.us {
   }
   reverse_proxy @notStatic http://127.0.0.1:8080
 }
+
+g2.me5.us {
+  root * /usr/share/caddy/g2/
+
+  @notApi not path /api/*
+  handle @notApi {
+    try_files {path} {path} index.html
+  }
+
+  route /api/* {
+    uri strip_prefix /api
+    reverse_proxy 127.0.0.1:8080
+  }
+  file_server browse
+}
