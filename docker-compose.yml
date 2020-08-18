@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  caddy:
+    image: caddy:2
+    network_mode: host
+    restart: always
+    container_name: caddy
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./caddy/html/:/usr/share/caddy/:ro
+      - ./caddy/data/:/data/
+  httpbin:
+    image: mccutchen/go-httpbin
+    restart: always
+    container_name: httpbin
+    ports:
+      - 127.0.0.1:8080:8080
+

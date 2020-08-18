@@ -1,0 +1,9 @@
+g1.me5.us {
+  root * /usr/share/caddy/
+  file_server
+  
+  @notStatic {
+    not path /static/* /static2/* 
+  }
+  reverse_proxy @notStatic http://127.0.0.1:8080
+}
